@@ -499,7 +499,7 @@ func (v validatorImpl[T]) ValidateAmount(data interface{}) error {
 		if data.(string) == "" {
 			return nil
 		}
-		cond := regexp.MustCompile(`^(0|[1-9]\d{1,10})[.]0{2}$`)
+		cond := regexp.MustCompile(`^(0|[1-9]\d{0,10})[.]0{2}$`)
 		if !cond.MatchString(data.(string)) {
 			return &snap_validator_errors.ErrorValidation{
 				Code:    "40001",
