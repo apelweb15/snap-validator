@@ -2,9 +2,6 @@ package validator
 
 import (
 	"fmt"
-	"github.com/apelweb15/snap-validator/internal/models"
-	"github.com/apelweb15/snap-validator/snap_validator_errors"
-	"github.com/apelweb15/snap-validator/snap_validator_utils"
 	"net/mail"
 	"net/url"
 	"reflect"
@@ -12,6 +9,10 @@ import (
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/apelweb15/snap-validator/internal/models"
+	"github.com/apelweb15/snap-validator/snap_validator_errors"
+	"github.com/apelweb15/snap-validator/snap_validator_utils"
 )
 
 type validatorImpl[T any] struct {
@@ -44,6 +45,11 @@ func (v validatorImpl[T]) ValidateStructSnapServiceCode(data interface{}, servic
 func (v validatorImpl[T]) validate(data interface{}, parentProperty ...models.ValidatorProperty) error {
 	reflectType := reflect.TypeOf(data)
 	reflectValue := reflect.ValueOf(data)
+
+	if reflectType.Kind() == reflect.String {
+		return nil
+	}
+
 	for i := 0; i < reflectType.NumField(); i++ {
 		fieldType := reflectType.Field(i)
 		fieldValue := reflectValue.Field(i)

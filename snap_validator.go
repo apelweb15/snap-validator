@@ -26,3 +26,10 @@ func ValidateStruct(data interface{}, serviceCode string) error {
 func (v *SnapValidator) ValidateStruct(data interface{}, serviceCode string) error {
 	return v.validator.ValidateStructSnapServiceCode(data, serviceCode)
 }
+
+func ValidateAlphaNumSymbol(data interface{}) error {
+	return snapValidator.ValidateAlphaNumSymbol(data)
+}
+func (v *SnapValidator) ValidateAlphaNumSymbol(data interface{}) error {
+	return v.validator.ValidateAlphaNumSymbol(data)
+}
